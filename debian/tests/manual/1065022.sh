@@ -29,7 +29,7 @@ assert () {
     fi
 }
 
-# Preconditions: install libglib2.0-0, libglib2.0-0t64, at least one
+# Preconditions: install libglib2.0-0, libglib2.0-0, at least one
 # GSettings schema and at least one GIO module.
 dpkg --add-architecture "$other_arch"
 apt-get -y update
@@ -55,7 +55,7 @@ done
 apt-get -y remove "libglib2.0-0:$other_arch" "dconf-gsettings-backend:$other_arch"
 apt-get -y autoremove
 
-# Upgrade to current unstable, with libglib2.0-0t64
+# Upgrade to current unstable, with libglib2.0-0
 cat > /etc/apt/sources.list.d/debian.sources <<EOF
 Types: deb
 URIs: http://deb.debian.org/debian
@@ -70,10 +70,10 @@ if [ -e "debian/tests/manual/local-1065022.sources" ]; then
     install -m644 "debian/tests/manual/local-1065022.sources" /etc/apt/sources.list.d/
 fi
 
-# Reproducer (1): Upgrade to libglib2.0-0t64. This runs the postrm from
+# Reproducer (1): Upgrade to libglib2.0-0. This runs the postrm from
 # libglib2.0-0, which deletes necessary files.
 apt-get -y update
-apt-get -y install --purge libglib2.0-0t64
+apt-get -y install --purge libglib2.0-0
 
 assert test -e /usr/share/glib-2.0/schemas/org.gnome.desktop.interface.gschema.xml
 assert test -s /usr/share/glib-2.0/schemas/gschemas.compiled
@@ -84,9 +84,9 @@ assert test -s "/usr/lib/$this_tuple/gio/modules/libdconfsettings.so"
 assert test -e "/usr/lib/$this_tuple/gio/modules/giomodule.cache"
 assert test -s "/usr/lib/$this_tuple/gio/modules/giomodule.cache"
 
-# Workaround: Trigger the postinst of libglib2.0-0t64, which will regenerate
+# Workaround: Trigger the postinst of libglib2.0-0, which will regenerate
 # the generated files.
-apt-get -y install --reinstall libglib2.0-0t64
+apt-get -y install --reinstall libglib2.0-0
 
 assert test -e /usr/share/glib-2.0/schemas/org.gnome.desktop.interface.gschema.xml
 assert test -s /usr/share/glib-2.0/schemas/gschemas.compiled

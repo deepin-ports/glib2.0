@@ -2,7 +2,7 @@
 # Copyright 2024 Simon McVittie
 # SPDX-License-Identifier: LGPL-2.1-or-later
 
-# Ensure that if the content of libglib2.0-0t64 is taken over by some
+# Ensure that if the content of libglib2.0-0 is taken over by some
 # other package libglib2.0-0xyz, then that other package will not trigger
 # a bug equivalent to #1065022.
 
@@ -11,7 +11,7 @@ set -eux
 export DEBIAN_FRONTEND=noninteractive
 n=0
 failed=0
-binary_package="libglib2.0-0t64"
+binary_package="libglib2.0-0"
 future_binary_package="libglib2.0-0xyz"
 srcdir="$(pwd)"
 tmpdir="$(mktemp -d)"
@@ -56,7 +56,7 @@ if ! dpkg-query -W dpkg-repack; then
     apt-get -y install dconf-gsettings-backend dpkg-repack gsettings-desktop-schemas
 fi
 
-# This assumes that libglib2.0-0t64 has at least one each of Breaks, Provides
+# This assumes that libglib2.0-0 has at least one each of Breaks, Provides
 # and Replaces, and will need to be adjusted if that assumption is broken in
 # the future for whatever reason.
 dpkg-query -s "$binary_package"
@@ -117,12 +117,12 @@ done
 
 # Purging the "new" (post-transition) binary package still *does* destroy the
 # GIO modules and GSettings schema summaries.
-# We need to explicitly remove libglib2.0-0t64 as well,
+# We need to explicitly remove libglib2.0-0 as well,
 # because otherwise apt will see the dependency chain
 #
 #   gsettings-desktop-schemas -> user-session-migration -> GLib
 #
-# and can decide to resolve it by reinstalling libglib2.0-0t64,
+# and can decide to resolve it by reinstalling libglib2.0-0,
 # which will make our assertions fail.
 apt-get -y purge "$future_binary_package" "$binary_package"
 

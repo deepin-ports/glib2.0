@@ -15,3 +15,7 @@ workarounds/tests-Skip-debugcontroller-test.patch
 workarounds/testfilemonitor-Skip-if-we-are-avoiding-flaky-tests.patch
 debian/girepository-Describe-the-Debian-specific-cross-prefixed-.patch
 debian/girepository-Search-for-typelibs-in-the-pre-multiarch-pat.patch
+workarounds/gmenumodel-test-Mark-as-flaky.patch
+workarounds/gvariant-test-Don-t-run-at-build-time-on-mips.patch
+workarounds/Make-gtester-xmllint-check-conditional.patch
+fix-test-timeout.patch

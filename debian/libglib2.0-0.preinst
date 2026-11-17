@@ -6,7 +6,7 @@ set -e
 
 # Clean up libglib2.0-0:*.postrm, so that when libglib2.0-0 is purged, it
 # will not delete non-dpkg-managed files that have been taken over by
-# libglib2.0-0t64, most problematically
+# libglib2.0-0, most problematically
 # /usr/share/glib-2.0/schemas/gschemas.compiled.
 # See https://bugs.debian.org/1065022, https://bugs.debian.org/1065170.
 # TODO: When, if ever, can we safely remove this?
@@ -16,13 +16,13 @@ case "$1" in
         # addressed #1110696.
         #
         # We also need to do this cleanup on new installations of
-        # libglib2.0-0t64 (because any new installation might be replacing
+        # libglib2.0-0 (because any new installation might be replacing
         # libglib2.0-0) so treat an empty version as being arbitrarily old.
         if dpkg --compare-versions "${2:-}" lt "2.84.4-2~"
         then
             # If there are several multiarch instances, they might have been
             # removed but not purged, in which case purging them (perhaps
-            # much later, and perhaps without installing libglib2.0-0t64 of
+            # much later, and perhaps without installing libglib2.0-0 of
             # the corresponding architecture) would still remove
             # /usr/share/glib-2.0/schemas/gschemas.compiled; so instead of
             # only doing this cleanup for the current architecture, we attempt
@@ -39,7 +39,7 @@ case "$1" in
                     && [ -n "$old_postrm" ] \
                     && [ -e "$old_postrm" ]
                 then
-                    echo "libglib2.0-0t64.preinst: Removing $old_postrm to avoid" \
+                    echo "libglib2.0-0.preinst: Removing $old_postrm to avoid" \
                         "loss of /usr/share/glib-2.0/schemas/gschemas.compiled..."
                     rm -f -v "$old_postrm"
                 fi

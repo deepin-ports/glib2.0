@@ -16,7 +16,7 @@ clean_up_giomodule_cache ()
         return 0
     fi
 
-    # Don't remove giomodule.cache if libglib2.0-0t64 has been replaced
+    # Don't remove giomodule.cache if libglib2.0-0 has been replaced
     # by some other ABI variant of essentially the same library
     # (for example libglib2.0-0xyz), if that ever happens, to
     # avoid causing an equivalent of <https://bugs.debian.org/1065022>.
@@ -52,7 +52,7 @@ clean_up_gsettings_schemas ()
 
     # Similarly, instead of using $DPKG_MAINTSCRIPT_PACKAGE_REFCOUNT, only
     # remove gschemas.compiled if GLib has completely gone away - not just
-    # libglib2.0-0 and libglib2.0-0t64, but any possible future ABI variant
+    # libglib2.0-0 and libglib2.0-0, but any possible future ABI variant
     # like libglib2.0-0xyz.
     #
     # This implementation is based on the assumption that any GLib

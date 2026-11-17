@@ -1,3 +1,34 @@
+glib2.0 (2.90.1-2deepin1) unstable; urgency=medium
+
+  * Sync with Debian forky 2.90.1-2.
+  * Revert 64-bit time_t changes (deepin does not use the t64 package
+    names): ship libglib2.0-0 instead of libglib2.0-0t64, drop
+    ${t64:Provides}, the self-referencing Breaks/Replaces on
+    libglib2.0-0 (<< 2.80.0-7~) and the dpkg-dev (>= 1.22.5)
+    build-dependency, as done in 2.84.4-3deepin1.
+  * Keep deepin patches:
+    - fix-test-timeout: rebased onto 2.90.1 (gobject threadtests,
+      dynamictests and performance tests in the "slow" suite).
+    - workarounds/gmenumodel-test-Mark-as-flaky
+    - workarounds/Make-gtester-xmllint-check-conditional
+    - workarounds/gvariant-test-Don-t-run-at-build-time-on-mips
+  * Drop patches that are included upstream in 2.90.1 (checked against the
+    2.90.1 source): CVE-2026-0988, CVE-2026-1484-1/-2, CVE-2026-1485,
+    CVE-2026-1489-1..4, CVE-2026-15588, CVE-2026-16118,
+    CVE-2026-58010..58015, keep-suffix-name-when-trashing and
+    truncate-long-filenames-in-trash-from-front (superseded by upstream
+    truncate_basename_front()), gfileutils-Preserve-mode-during-atomic-
+    updates, gconvert-Error-out-if-g_escape_uri_string-would-overflow,
+    fuzzing-Add-fuzz-tests-for-g_filename_-to-from-_uri,
+    gvariant-parser-* (3), gfileattribute-Fix-integer-overflow-calculating-
+    escaping-, gtimezone-* (2).
+  * Bootstrap for Python 3.14: drop the python3-gi and python3-dbus
+    <!nocheck> build-dependencies (pygobject >= 3.56 and dbus-python
+    build-depend on glib >= 2.86; OBS does not apply the nocheck profile).
+    Restore once they are rebuilt.
+
+ -- purofle <purofle@gmail.com>  Tue, 17 Nov 2026 20:18:39 +0800
+
 glib2.0 (2.90.1-2) unstable; urgency=medium
 
   * Re-upload with all orig tarballs, no source changes

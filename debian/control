@@ -11,7 +11,6 @@ Build-Depends:
  debhelper-compat (= 13),
  dh-sequence-gnome,
  dh-sequence-python3,
- dpkg-dev (>= 1.22.5),
  dbus-daemon <!nocheck> <!noinsttest>,
  gettext,
  libdbus-1-dev <!nocheck> <!noinsttest>,
@@ -37,8 +36,6 @@ Build-Depends-Arch:
  desktop-file-utils <!nocheck>,
  gobject-introspection (>= 1.80.0) <!nogir>,
  locales <!nocheck> | locales-all <!nocheck>,
- python3-dbus <!nocheck>,
- python3-gi <!nocheck>,
  shared-mime-info <!nocheck>,
  tzdata <!nocheck>,
  tzdata-legacy <!nocheck>,
@@ -52,7 +49,7 @@ Vcs-Browser: https://salsa.debian.org/gnome-team/glib
 Vcs-Git: https://salsa.debian.org/gnome-team/glib.git
 Homepage: https://gitlab.gnome.org/GNOME/glib
 
-Package: libglib2.0-0t64
+Package: libglib2.0-0
 Architecture: any
 Multi-Arch: same
 Depends:
@@ -66,16 +63,12 @@ Suggests:
  low-memory-monitor,
 Breaks:
  gnome-shell (<< 44.9-2~),
- libglib2.0-0 (<< 2.80.0-7~),
 Provides:
  libgio-2.0-0 (= ${binary:Version}),
  libglib-2.0-0 (= ${binary:Version}),
  libgmodule-2.0-0 (= ${binary:Version}),
  libgobject-2.0-0 (= ${binary:Version}),
  libgthread-2.0-0 (= ${binary:Version}),
- ${t64:Provides},
-Replaces:
- libglib2.0-0 (<< 2.80.0-7~),
 Description: GLib library of C routines
  GLib is a library containing many useful C routines for things such
  as trees, hashes, lists, and strings.  It is a useful general-purpose
@@ -160,7 +153,7 @@ Multi-Arch: same
 Section: libdevel
 Depends:
  libffi-dev,
- libglib2.0-0t64 (= ${binary:Version}),
+ libglib2.0-0 (= ${binary:Version}),
  libmount-dev [linux-any],
  libpcre2-dev,
  libselinux-dev [linux-any],

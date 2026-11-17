@@ -82,7 +82,7 @@ Depends:
  dconf-gsettings-backend,
  dpkg-repack,
  gsettings-desktop-schemas,
- libglib2.0-0t64,
+ libglib2.0-0,
 Restrictions:
  allow-stderr,
  breaks-testbed,
