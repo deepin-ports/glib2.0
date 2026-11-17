@@ -57,6 +57,7 @@ Tests:
  gmenumodel,
  mainloop,
  memory-monitor-dbus,
+ memory-monitor-psi,
  socket,
  testfilemonitor,
  thread-pool-slow,
@@ -81,7 +82,7 @@ Depends:
  dconf-gsettings-backend,
  dpkg-repack,
  gsettings-desktop-schemas,
- libglib2.0-0,
+ libglib2.0-0t64,
 Restrictions:
  allow-stderr,
  breaks-testbed,

@@ -1,0 +1,51 @@
+From: Simon McVittie <smcv@debian.org>
+Date: Sat, 1 Aug 2026 12:41:37 +0100
+Subject: Skip memory-monitor-psi* tests if not specifically requested
+
+These seem to be environment-dependent: one test fails under
+autopkgtest-virt-qemu, and another under Salsa-CI.
+
+Bug-Debian: https://bugs.debian.org/1143197
+Bug-Debian: https://bugs.debian.org/1143241
+Forwarded: no
+---
+ gio/tests/memory-monitor-psi-env-set.c | 7 +++++++
+ gio/tests/memory-monitor-psi.c         | 7 +++++++
+ 2 files changed, 14 insertions(+)
+
+diff --git a/gio/tests/memory-monitor-psi-env-set.c b/gio/tests/memory-monitor-psi-env-set.c
+index 19ffdda..ad44082 100644
+--- a/gio/tests/memory-monitor-psi-env-set.c
++++ b/gio/tests/memory-monitor-psi-env-set.c
+@@ -386,6 +386,13 @@ main (int argc, char **argv)
+   g_setenv ("GIO_USE_MEMORY_MONITOR", "psi", TRUE);
+ 
+   g_test_init (&argc, &argv, G_TEST_OPTION_ISOLATE_DIRS, NULL);
++
++  if (g_getenv ("DEB_ALLOW_FLAKY_TESTS") == NULL)
++    {
++      g_print("1..0 # SKIP https://bugs.debian.org/1143197 https://bugs.debian.org/1143241\n");
++      return 0;
++    }
++
+   g_test_add ("/memory-monitor-psi-env-set/receive-signal", SetupData, NULL,
+               tests_setup, test_receive_signals, tests_teardown);
+ 
+diff --git a/gio/tests/memory-monitor-psi.c b/gio/tests/memory-monitor-psi.c
+index 3b42562..58a7118 100644
+--- a/gio/tests/memory-monitor-psi.c
++++ b/gio/tests/memory-monitor-psi.c
+@@ -110,6 +110,13 @@ int
+ main (int argc, char **argv)
+ {
+   g_test_init (&argc, &argv, G_TEST_OPTION_ISOLATE_DIRS, NULL);
++
++  if (g_getenv ("DEB_ALLOW_FLAKY_TESTS") == NULL)
++    {
++      g_print("1..0 # SKIP https://bugs.debian.org/1143197 https://bugs.debian.org/1143241\n");
++      return 0;
++    }
++
+   g_test_add ("/memory-monitor-psi/receive-signal", SetupData, NULL,
+               tests_setup, test_receive_signals, tests_teardown);
+ 

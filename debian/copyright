@@ -1,6 +1,6 @@
 Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
-Upstream-Name: GLib
 Source: https://download.gnome.org/sources/glib/
+Upstream-Name: GLib
 Comment:
  Some files are mechanically derived from Unicode data.
  We do not use the Debian unicode-data package as source for these, because
@@ -133,11 +133,12 @@ Copyright:
  2007 Jürg Billeter
  2018 Kai Kang
  2010 Karo Mkrtchyan
+ 2025 Khalid Abu Shawarib
  2013-2015 Lars Uebernickel
  2011 Laszlo Pandy
  2007 Lennart Poettering
  2008 litl, LLC
- 2023 Luca Bacci
+ 2023-2025 Luca Bacci
  2006 Lukas Novotny
  2002 Manish Singh
  2005-2007 Marco Barisione
@@ -412,11 +413,6 @@ Copyright: none
 License: Iconv-PD
 
 Files:
- gio/gwin32api-application-activation-manager.h
- gio/gwin32api-iterator.h
- gio/gwin32api-misc.h
- gio/gwin32api-package.h
- gio/gwin32api-storage.h
  glib/dirent/dirent.c
  glib/dirent/dirent.h
 Copyright: none
@@ -514,8 +510,6 @@ License: cmph
  .
  On Debian systems, a copy of the MPL version 1.1 can be found in
  /usr/share/common-licenses/MPL-1.1.
-
-# ----------------------------------------------------------------------
 
 License: AFL-2.0
  The Academic Free License
@@ -690,38 +684,6 @@ License: Apache-2.0 with LLVM exception
  prospectively choose to deem waived or otherwise exclude such Section(s) of
  the License, but only in their entirety and only with respect to the Combined
  Software.
-
-License: bzip2-1.0.6
- Redistribution and use in source and binary forms, with or without
- modification, are permitted provided that the following conditions
- are met:
- .
- 1. Redistributions of source code must retain the above copyright
-    notice, this list of conditions and the following disclaimer.
- .
- 2. The origin of this software must not be misrepresented; you must
-    not claim that you wrote the original software.  If you use this
-    software in a product, an acknowledgment in the product
-    documentation would be appreciated but is not required.
- .
- 3. Altered source versions must be plainly marked as such, and must
-    not be misrepresented as being the original software.
- .
- 4. The name of the author may not be used to endorse or promote
-    products derived from this software without specific prior written
-    permission.
- .
- THIS SOFTWARE IS PROVIDED BY THE AUTHOR ``AS IS'' AND ANY EXPRESS
- OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
- WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
- ARE DISCLAIMED.  IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY
- DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
- DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE
- GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
- INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
- WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
- NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
- SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 License: CC-BY-SA-3.0
  SPDX license expression "CC-BY-SA-3.0": https://spdx.org/licenses/CC-BY-SA-3.0.html
@@ -1196,24 +1158,6 @@ License: LGPL-3+
 License: Mingw-PD
  This file has no copyright assigned and is placed in the Public Domain.
 
-License: old-glib-tests
- This work is provided "as is"; redistribution and modification
- in whole or in part, in any medium, physical or electronic is
- permitted without restriction.
- .
- This work is distributed in the hope that it will be useful,
- but WITHOUT ANY WARRANTY; without even the implied warranty of
- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- .
- In no event shall the authors or contributors be liable for any
- direct, indirect, incidental, special, exemplary, or consequential
- damages (including, but not limited to, procurement of substitute
- goods or services; loss of use, data, or profits; or business
- interruption) however caused and on any theory of liability, whether
- in contract, strict liability, or tort (including negligence or
- otherwise) arising in any way out of the use of this software, even
- if advised of the possibility of such damage.
-
 License: Plumb-PD
  The algorithm is due to Ron Rivest.  This code was
  written by Colin Plumb in 1993, no copyright is claimed.
@@ -1253,3 +1197,53 @@ License: Unicode-DFS-2016
  ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE
  WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
  NONINFRINGEMENT OF THIRD PARTY RIGHTS.
+
+License: bzip2-1.0.6
+ Redistribution and use in source and binary forms, with or without
+ modification, are permitted provided that the following conditions
+ are met:
+ .
+ 1. Redistributions of source code must retain the above copyright
+    notice, this list of conditions and the following disclaimer.
+ .
+ 2. The origin of this software must not be misrepresented; you must
+    not claim that you wrote the original software.  If you use this
+    software in a product, an acknowledgment in the product
+    documentation would be appreciated but is not required.
+ .
+ 3. Altered source versions must be plainly marked as such, and must
+    not be misrepresented as being the original software.
+ .
+ 4. The name of the author may not be used to endorse or promote
+    products derived from this software without specific prior written
+    permission.
+ .
+ THIS SOFTWARE IS PROVIDED BY THE AUTHOR ``AS IS'' AND ANY EXPRESS
+ OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+ WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ ARE DISCLAIMED.  IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY
+ DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+ DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE
+ GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+ INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+ WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+ NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+License: old-glib-tests
+ This work is provided "as is"; redistribution and modification
+ in whole or in part, in any medium, physical or electronic is
+ permitted without restriction.
+ .
+ This work is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ .
+ In no event shall the authors or contributors be liable for any
+ direct, indirect, incidental, special, exemplary, or consequential
+ damages (including, but not limited to, procurement of substitute
+ goods or services; loss of use, data, or profits; or business
+ interruption) however caused and on any theory of liability, whether
+ in contract, strict liability, or tort (including negligence or
+ otherwise) arising in any way out of the use of this software, even
+ if advised of the possibility of such damage.

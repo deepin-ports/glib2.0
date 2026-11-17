@@ -2,10 +2,14 @@
 libglib2.0-tests: hardening-no-fortify-functions [usr/libexec/installed-tests/glib/*]
 # Some are deliberately not well-formed UTF-8
 libglib2.0-tests: national-encoding [usr/libexec/installed-tests/glib/markups/fail*]
+# Not actually a text file, but sufficiently close to look like one
+libglib2.0-tests: national-encoding [usr/libexec/installed-tests/glib/thumbnails/*]
 # Not every .txt file is documentation
 libglib2.0-tests: package-contains-documentation-outside-usr-share-doc [usr/libexec/installed-tests/glib/*.txt]
 # Test data for content-type sniffing, never actually executed
 libglib2.0-tests: script-not-executable [usr/libexec/installed-tests/glib/x-content/unix-software/autorun.sh]
+# Test library for running tests, it's never executed but rather imported
+libglib2.0-tests: script-not-executable [usr/libexec/installed-tests/glib/testprogramrunner.py]
 # This is lorem ipsum in a test-case, nothing to do with the Debian Free Software Guidelines
 libglib2.0-tests: spelling-error-in-binary dsfg dfsg [usr/libexec/installed-tests/glib/utf8-pointer]
 # Depends on a private test-only library

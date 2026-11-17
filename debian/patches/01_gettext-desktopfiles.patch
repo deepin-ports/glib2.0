@@ -16,7 +16,7 @@ Applied-upstream: no, rejected because "this will be solved soon" (in 2013)
  1 file changed, 83 insertions(+)
 
 diff --git a/glib/gkeyfile.c b/glib/gkeyfile.c
-index 0e4335d..6c44183 100644
+index f5b600b..6c27089 100644
 --- a/glib/gkeyfile.c
 +++ b/glib/gkeyfile.c
 @@ -501,6 +501,17 @@
@@ -45,7 +45,7 @@ index 0e4335d..6c44183 100644
  
    gint ref_count;  /* (atomic) */
  };
-@@ -645,6 +657,7 @@ g_key_file_init (GKeyFile *key_file)
+@@ -652,6 +664,7 @@ g_key_file_init (GKeyFile *key_file)
    key_file->parse_buffer = NULL;
    key_file->list_separator = ';';
    key_file->flags = 0;
@@ -53,7 +53,7 @@ index 0e4335d..6c44183 100644
  }
  
  static void
-@@ -665,6 +678,12 @@ g_key_file_clear (GKeyFile *key_file)
+@@ -672,6 +685,12 @@ g_key_file_clear (GKeyFile *key_file)
        key_file->parse_buffer = NULL;
      }
  
@@ -66,7 +66,7 @@ index 0e4335d..6c44183 100644
    tmp = key_file->groups;
    while (tmp != NULL)
      {
-@@ -888,6 +907,11 @@ g_key_file_load_from_fd (GKeyFile       *key_file,
+@@ -895,6 +914,11 @@ g_key_file_load_from_fd (GKeyFile       *key_file,
        return FALSE;
      }
  
@@ -78,7 +78,7 @@ index 0e4335d..6c44183 100644
    return TRUE;
  }
  
-@@ -1001,6 +1025,11 @@ g_key_file_load_from_data (GKeyFile       *key_file,
+@@ -1008,6 +1032,11 @@ g_key_file_load_from_data (GKeyFile       *key_file,
        return FALSE;
      }
  
@@ -90,7 +90,7 @@ index 0e4335d..6c44183 100644
    return TRUE;
  }
  
-@@ -2270,6 +2299,8 @@ g_key_file_get_locale_string (GKeyFile     *key_file,
+@@ -2598,6 +2627,8 @@ g_key_file_get_locale_string (GKeyFile     *key_file,
    GError *key_file_error;
    gchar **languages;
    gboolean free_languages = FALSE;
@@ -99,7 +99,7 @@ index 0e4335d..6c44183 100644
    gint i;
  
    g_return_val_if_fail (key_file != NULL, NULL);
-@@ -2291,6 +2322,25 @@ g_key_file_get_locale_string (GKeyFile     *key_file,
+@@ -2619,6 +2650,25 @@ g_key_file_get_locale_string (GKeyFile     *key_file,
        free_languages = FALSE;
      }
    
@@ -125,7 +125,7 @@ index 0e4335d..6c44183 100644
    for (i = 0; languages[i]; i++)
      {
        if (g_strcmp0 (languages[i], "C") == 0)
-@@ -2307,6 +2357,39 @@ g_key_file_get_locale_string (GKeyFile     *key_file,
+@@ -2635,6 +2685,39 @@ g_key_file_get_locale_string (GKeyFile     *key_file,
  	break;
     }
  

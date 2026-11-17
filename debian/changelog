@@ -1,100 +1,514 @@
-glib2.0 (2.84.4-3deepin5) unstable; urgency=medium
+glib2.0 (2.90.1-2) unstable; urgency=medium
 
-  * Rebuild with LTO enabled (dpkg vendor feature optimize/lto).
+  * Re-upload with all orig tarballs, no source changes
 
- -- tunaichao <tunaichao@uniontech.com>  Fri, 11 Sep 2026 14:59:03 +0800
+ -- Simon McVittie <smcv@debian.org>  Wed, 07 Oct 2026 14:45:14 +0100
 
-glib2.0 (2.84.4-3deepin4) unstable; urgency=medium
+glib2.0 (2.90.1-1) unstable; urgency=medium
 
-  * fix: handle UTF-8 in long trash names
+  * New upstream stable release
+  * d/gbp.conf: Use 2.90.x branch, now that upstream has branched for 2.91.x
+  * d/rules, d/tests: Generate lt_LT locale for one of the new tests
+  * d/p/workarounds/testfilemonitor-Skip-if-we-are-avoiding-flaky-tests.patch:
+    Update to cover all relevant tests
+  * d/p/workarounds/gvariant-test-Don-t-run-at-build-time-on-mips.patch:
+    Remove mips*-specific workaround now that Debian no longer supports
+    any mips* architectures
 
- -- Liu Zhangjian <liuzhangjian@uniontech.com>  Mon, 31 Aug 2026 10:19:05 +0800
+ -- Simon McVittie <smcv@debian.org>  Wed, 07 Oct 2026 12:36:42 +0100
 
-glib2.0 (2.84.4-3deepin3) unstable; urgency=medium
+glib2.0 (2.90.0-1) unstable; urgency=medium
 
-  * fix(cve): CVE-2026-16118
+  * New upstream release
 
- -- deepin-ci-robot <packages@deepin.org>  Wed, 26 Aug 2026 18:31:55 +0800
+ -- Alessandro Astone <alessandro.astone@canonical.com>  Thu, 10 Sep 2026 12:07:43 +0200
 
-glib2.0 (2.84.4-3deepin2) unstable; urgency=medium
+glib2.0 (2.89.4-2) unstable; urgency=medium
 
-  * fix(cve): CVE-2026-15588
+  * Re-upload with orig tarball, no source changes
 
- -- deepin-ci-robot <packages@deepin.org>  Fri, 07 Aug 2026 15:51:38 +0800
+ -- Simon McVittie <smcv@debian.org>  Mon, 24 Aug 2026 19:33:06 +0100
 
-glib2.0 (2.84.4-3deepin1) unstable; urgency=high
+glib2.0 (2.89.4-1) unstable; urgency=medium
 
-  * Fix CVE-2026-58010: backport upstream fix (Closes: CVE-2026-58010)
-  * Fix CVE-2026-58011: backport upstream fix (Closes: CVE-2026-58011)
-  * Fix CVE-2026-58012: backport upstream fix (Closes: CVE-2026-58012)
-  * Fix CVE-2026-58013: backport upstream fix (Closes: CVE-2026-58013)
-  * Fix CVE-2026-58014: backport upstream fix (Closes: CVE-2026-58014)
-  * Fix CVE-2026-58015: backport upstream fix (Closes: CVE-2026-58015)
+  * New upstream release
+    - Fixes a main-loop regression in 2.89.3 (mutter#4994 upstream)
+  * d/patches: Drop patches that were part of the upstream release
 
- -- deepin-ci-robot <packages@deepin.org>  Mon, 20 Jul 2026 16:00:00 +0800
+ -- Simon McVittie <smcv@debian.org>  Mon, 24 Aug 2026 18:52:52 +0100
 
-glib2.0 (2.84.4-3deepin1) unstable; urgency=medium
+glib2.0 (2.89.3-5) unstable; urgency=medium
 
-  * Revert 64-bit time_t changes.
-  * Restore deepin patches on top of 2.84.4-3~deb13u3:
-    - fix-test-timeout: Set slow for gobject tests
-    - keep-suffix-name-when-trashing: Fix suffix truncation in trash
-    - gmenumodel-test: Mark as flaky
-    - Make-gtester-xmllint-check-conditional: Skip gracefully
+  * Release to unstable
 
- -- lichenggang <lichenggang@deepin.org>  Fri, 10 Jul 2026 14:12:04 +0800
+ -- Jeremy Bícha <jbicha@ubuntu.com>  Fri, 21 Aug 2026 16:37:11 +0200
 
-glib2.0 (2.84.4-3~deb13u3) trixie; urgency=medium
+glib2.0 (2.89.3-4) experimental; urgency=medium
 
-  * Non-maintainer upload by the LTS Security Team.
+  * Merge from unstable
+    - d/p/xdgmime-Check-if-caches-are-set-before-dumping-them.patch,
+      d/p/Fix-CVE-2026-16118-heap-buffer-overflow-in-xdgmimemagic.c.patch:
+      Add patches from upstream (to be released in 2.89.4) to address
+      an out-of-bounds write if parsing a crafted XDG MIME magic file,
+      and fix a related test failure on minimal systems
+      (glib#3992 upstream, CVE-2026-16118, Closes: #1142717)
+  * d/p/workarounds: Mark memory-monitor-psi tests as flaky
+    (Mitigates: #1143197, #1143241)
+
+ -- Simon McVittie <smcv@debian.org>  Wed, 12 Aug 2026 21:28:14 +0100
+
+glib2.0 (2.89.3-3) experimental; urgency=medium
+
+  [ Simon McVittie ]
+  * Merge packaging from unstable
+    - d/tests/1065022-futureproofing: Make the test pass more reliably,
+      by ensuring that user-session-migration gets removed rather than
+      making libglib2.0-0t64 be reinstalled
+  * Drop patches added by 2.88.3-2, already part of 2.89.x
+
+ -- Jeremy Bícha <jbicha@ubuntu.com>  Thu, 06 Aug 2026 14:23:01 +0200
+
+glib2.0 (2.89.3-2) experimental; urgency=medium
+
+  * d/p/gio-tests-services-Fix-installed-service-file-containing-.patch:
+    Add patch from upstream to fix autopkgtest regression
+  * d/changelog: Mention CVE-2026-15588, CVE-2026-58016 in the appropriate
+    previous changelog entry
+
+ -- Simon McVittie <smcv@debian.org>  Fri, 31 Jul 2026 21:11:39 +0100
+
+glib2.0 (2.89.3-1) experimental; urgency=medium
+
+  * New upstream release
+  * debian/libglib2.0-0t64.symbols: Add new symbols
+
+ -- Jeremy Bícha <jbicha@ubuntu.com>  Thu, 30 Jul 2026 15:55:39 +0200
+
+glib2.0 (2.89.2-1) experimental; urgency=medium
+
+  * New upstream release
+    - Fixes possible integer underflow when parsing D-Bus introspection XML
+      (CVE-2026-58016, Closes: #1141316)
+    - Fixes resource exhaustion if a malicious client can contact a GDBusServer
+      (CVE-2026-15588, Closes: #1142835)
+  * d/p: Refresh patches
+  * d/libglib2.0-0t64.symbols: Add new symbol
+
+ -- Alessandro Astone <alessandro.astone@canonical.com>  Fri, 24 Jul 2026 18:58:44 +0200
+
+glib2.0 (2.88.3-3) unstable; urgency=medium
+
+  * d/p/xdgmime-Check-if-caches-are-set-before-dumping-them.patch,
+    d/p/Fix-CVE-2026-16118-heap-buffer-overflow-in-xdgmimemagic.c.patch:
+    Add patches from upstream (to be released in 2.89.4) to address
+    an out-of-bounds write if parsing a crafted XDG MIME magic file,
+    and fix a related test failure on minimal systems
+    (glib#3992 upstream, CVE-2026-16118, Closes: #1142717)
+
+ -- Simon McVittie <smcv@debian.org>  Wed, 12 Aug 2026 10:10:25 +0100
+
+glib2.0 (2.88.3-2) unstable; urgency=medium
+
+  * Backport patches from 2.89.0 to harden D-Bus introspection parsing
+    - d/p/gdbusintrospection-Add-some-assertions-before-array-deref.patch,
+      d/p/tests-Improve-D-Bus-introspection-test-paths.patch,
+      d/p/gdbusintrospection-Fix-XML-parser-state-handling-for-node.patch,
+      d/p/fuzzing-Add-a-fuzz-test-for-g_dbus_node_info_new_for_xml.patch:
+      Avoid a possible integer underflow if parsing malformed D-Bus
+      introspection XML sent by a malicious service
+      (glib#3932 upstream, CVE-2026-58016, Closes: #1141316)
+  * d/tests/1065022-futureproofing: Make the test pass more reliably,
+    by ensuring that user-session-migration gets removed rather than
+    making libglib2.0-0t64 be reinstalled
+
+ -- Simon McVittie <smcv@debian.org>  Sun, 02 Aug 2026 17:22:30 +0100
+
+glib2.0 (2.88.3-1) unstable; urgency=medium
+
+  * New upstream stable release
+    - Fixes resource exhaustion if a malicious client can contact a
+      GDBusServer (CVE-2026-15588, Closes: #1142835)
+  * d/p/gio-tests-services-Fix-installed-service-file-containing-.patch:
+    Add patch from upstream to fix autopkgtest regression
+  * d/control, d/gbp.conf: Use debian/forky branch
+
+ -- Simon McVittie <smcv@debian.org>  Fri, 31 Jul 2026 21:13:54 +0100
+
+glib2.0 (2.88.2-1) unstable; urgency=medium
+
+  * New upstream stable release
+  * d/watch: Only watch for stable (even-numbered) branches
+  * d/gbp.conf: Use upstream/2.88.x branch.
+    Initial 2.89.x versions have been released upstream.
+  * d/control: Move Build-Profiles from libglib2.0-0t64 back to
+    libglib2.0-tests. This was mistakenly moved by `cme fix dpkg`
+    in the previous upload.
+  * Ignore another Lintian false positive in the test data
+
+ -- Simon McVittie <smcv@debian.org>  Thu, 25 Jun 2026 19:05:13 +0100
+
+glib2.0 (2.88.1-2) unstable; urgency=medium
+
+  * New upstream release
+  * Run cme fix dpkg --save
+  * Update debian/watch to comply with new Salsa CI uscan job
+  * Update Standards Version to 4.7.4
+
+ -- Jeremy Bícha <jbicha@ubuntu.com>  Mon, 04 May 2026 18:18:03 -0400
+
+glib2.0 (2.88.0-1) unstable; urgency=medium
+
+  * New upstream release
+    - Work around a build regression in NetworkManager with 2.87.x
+  * Release to unstable
+
+ -- Simon McVittie <smcv@debian.org>  Mon, 16 Mar 2026 21:37:12 +0000
+
+glib2.0 (2.87.5-1) experimental; urgency=medium
+
+  * New upstream release
+  * d/control: Bump gi-docgen to 2026.1, matching upstream CI
+  * d/copyright: Remove comment line.
+    The machine-readable syntax doesn't actually allow these. Use
+    a double blank line as the divider between Files and standalone
+    License paragraphs instead.
+
+ -- Simon McVittie <smcv@debian.org>  Fri, 13 Mar 2026 16:54:09 +0000
+
+glib2.0 (2.87.3-1) experimental; urgency=medium
+
+  * Update the source using the upstream-generated-tarball
+  * debian/control: Update breaks on old gjs and pygobject.
+    Versions prior to these have not the fallback code to support the
+    GLib/GLibUnix split
+
+ -- Marco Trevisan (Treviño) <marco@ubuntu.com>  Fri, 27 Feb 2026 00:24:46 +0100
+
+glib2.0 (2.87.3~gitlab0-1) experimental; urgency=medium
+
+  * New upstream release:
+    Upstream has tagged a new release but not produced tarballs yet, due to CI
+    problems. Let's get this (the tagged contents) early in experimental
+    though, so we can start testing it, but using a pre-version so that we can
+    later import the actual 2.87.3. tarball.
+  * d/p: Refresh and drop applied patches
+  * debian/libglib2.0-0t64.symbols: Update symbols
+
+ -- Marco Trevisan (Treviño) <marco@ubuntu.com>  Thu, 26 Feb 2026 00:48:14 +0100
+
+glib2.0 (2.87.2-3) unstable; urgency=medium
+
+  * Release to unstable
+
+ -- Jeremy Bícha <jbicha@ubuntu.com>  Sat, 07 Feb 2026 10:29:16 -0500
+
+glib2.0 (2.87.2-2) experimental; urgency=medium
+
+  * Merge packaging from unstable
+    - Revert "d/control, d/gbp.conf: Set branch for testing/unstable"
+  * Combine patch series for unstable + experimental
+    - Drop patches that were included in 2.87.x already
+    - d/p/gtimezone-Handle-etc-localtime-symlink-pointing-to-anothe.patch,
+      d/p/gtimezone-Use-var-db-timezone-zoneinfo-as-the-default-TZD.patch:
+      Replace the patch for #1119919 with the version that was applied
+      upstream
+  * d/copyright: Remove mentions of files that were removed upstream
+
+ -- Simon McVittie <smcv@debian.org>  Thu, 29 Jan 2026 15:05:52 +0000
+
+glib2.0 (2.87.2-1) experimental; urgency=medium
+
+  [ Jeremy Bícha ]
+  * New upstream release
+
+  [ Alessandro Astone ]
+  * Add patch to fix build tests for big-endian systems
   * Add patch to fix timezone handling with Debian & Ubuntu's symlinks
     (Closes: #1119919) (LP: #2130378)
-  * CVE-2026-0988: Missing input validation in g_buffered_input_stream_peek
-    (Closes: #1125752)
-  * CVE-2026-1484: Integer overflow in base64 encoding can cause memory
-    corruption. (Closes: #1126551)
-  * CVE-2026-1485: Buffer underflow vulnerability in content type parsing
-    caused by (signed) integer wrap for large inputs. (Closes: #1126550)
-  * CVE-2026-1489: Integer overflow in unicode conversion
-    can lead to memory corruption. (Closes: #1126549)
 
- -- Andreas Henriksson <andreas@fatal.se>  Mon, 16 Feb 2026 09:11:04 +0100
+  [ Simon McVittie ]
+  * Use Build-Depends: libselinux-dev instead of libselinux1-dev
+    (Closes: #1124750)
 
-glib2.0 (2.84.4-3~deb13u2) trixie; urgency=medium
+ -- Jeremy Bícha <jbicha@ubuntu.com>  Fri, 23 Jan 2026 10:29:07 -0500
 
-  * d/patches: Add patches from 2.86.3 upstream to avoid integer overflows
-    - d/p/gconvert-Error-out-if-g_escape_uri_string-would-overflow.patch,
-      d/p/fuzzing-Add-fuzz-tests-for-g_filename_-to-from-_uri.patch:
-      Fix an integer overflow when interpolating hundreds of megabytes of
-      unescaped text into a URI, and add test coverage
+glib2.0 (2.87.1-1) experimental; urgency=medium
+
+  * New upstream release
+  * debian/libglib2.0-0t64.symbols: Add new symbols
+
+ -- Jeremy Bícha <jbicha@ubuntu.com>  Mon, 05 Jan 2026 12:27:25 -0500
+
+glib2.0 (2.86.3-5) unstable; urgency=medium
+
+  * d/control, d/gbp.conf: Set branch for testing/unstable.
+    We already have 2.87.x in experimental, using the debian/latest branch.
+  * d/p/gbufferedinputstream-Fix-a-potential-integer-overflow-in-.patch:
+    Avoid a crash in g_buffered_input_stream_peek().
+    This is only a problem if an extremely large offset is used.
+    (CVE-2026-0988; Closes: #1125752)
+  * d/p/gbase64-Use-gsize-to-prevent-potential-overflow.patch,
+    d/p/gbase64-Ensure-that-the-out-value-is-within-allocated-siz.patch:
+    Avoid a buffer overflow if an extremely large binary blob is encoded in
+    base64 (CVE-2026-1484, Closes: #1126551)
+  * d/p/gio-gcontenttype-fdo-Do-not-overflow-if-header-is-longer-.patch:
+    Avoid a buffer overflow if XDG_DATA_DIRS/mime/treemagic is a crafted
+    file with multi-gigabyte lines (CVE-2026-1485, Closes: #1126550)
+  * d/p/guniprop-Use-size_t-for-output_marks-length.patch,
+    d/p/guniprop-Do-not-convert-size_t-to-gint.patch,
+    d/p/guniprop-Ensure-we-do-not-overflow-size-in-g_utf8_-strdow.patch,
+    d/p/glib-tests-unicode-Add-test-debug-information-when-parsin.patch:
+    Avoid a buffer overflow if crafted multi-gigabyte text is converted
+    between upper and lower case (CVE-2026-1489, Closes: #1126549)
+  * d/p/gtimezone-Handle-etc-localtime-symlink-pointing-to-anothe.patch,
+    d/p/gtimezone-Use-var-db-timezone-zoneinfo-as-the-default-TZD.patch:
+    Add patches from 2.87.x to fix handling of time zones that are symlinks
+    (Closes: #1119919) (LP: #2130378)
+  * d/control: (Build-)Depend on libselinux-dev instead of libselinux1-dev
+    (Closes: #1124750)
+
+ -- Simon McVittie <smcv@debian.org>  Wed, 28 Jan 2026 18:44:21 +0000
+
+glib2.0 (2.86.3-4) unstable; urgency=medium
+
+  * Fix hurd build
+
+ -- Jeremy Bícha <jbicha@ubuntu.com>  Thu, 01 Jan 2026 07:59:38 -0500
+
+glib2.0 (2.86.3-3) unstable; urgency=medium
+
+  * Fix hurd build
+
+ -- Jeremy Bícha <jbicha@ubuntu.com>  Wed, 31 Dec 2025 18:35:13 -0500
+
+glib2.0 (2.86.3-2) unstable; urgency=medium
+
+  [ Jeremy Bícha ]
+  * Remove :native from Build-Depends: python3-packaging (Closes: #1124385)
+  * Remove nosysprof build profile because libsysprof-capture-4-dev
+    is built for all Linux architectures and does not require glib2.0
+  * Remove kfreebsd reference
+  * Override dh_gnome to avoid build warnings
+  * Bump Standards Version to 4.7.3
+
+  [ Simon McVittie ]
+  * Mention #1122346, #1122347 in previous changelog entry
+  * Mention CVE-2025-14512 in previous changelog entry now that it has
+    been allocated
+
+ -- Jeremy Bícha <jbicha@ubuntu.com>  Wed, 31 Dec 2025 10:32:42 -0500
+
+glib2.0 (2.86.3-1) unstable; urgency=medium
+
+  * New upstream security-fix release
+    - Fix calculation of buffer sizes when escaping URI strings
       (CVE-2025-13601, glib#3827 upstream, Closes: #1121488)
-    - d/p/gvariant-parser-Fix-potential-integer-overflow-parsing-by.patch:
-      Fix an integer overflow when parsing very large strings in GVariant
-      text format (CVE-2025-14087, glib#3834 upstream, Closes: #1122347)
-    - d/p/gvariant-parser-Use-size_t-to-count-numbers-of-child-elem.patch,
-      d/p/gvariant-parser-Convert-error-handling-code-to-use-size_t.patch:
-      Fix other potential integer overflows parsing very large container
-      types in GVariant text format, related to CVE-2025-14087
-    - d/p/gfileattribute-Fix-integer-overflow-calculating-escaping-.patch:
-      Fix an integer overflow when escaping invalid characters in very
-      large file attributes
+    - Fix possible buffer underflow parsing GVariant strings/bytestrings
+      (CVE-2025-14087, glib#3834 upstream, Closes: #1122347)
+    - Fix integer overflow in file attribute escaping
       (CVE-2025-14512, glib#3845 upstream, Closes: #1122346)
+    - Windows-specific changes not described in detail here
 
- -- Simon McVittie <smcv@debian.org>  Fri, 12 Dec 2025 18:43:13 +0000
+ -- Simon McVittie <smcv@debian.org>  Tue, 09 Dec 2025 13:31:14 +0000
 
-glib2.0 (2.84.4-3~deb13u1) trixie; urgency=medium
+glib2.0 (2.86.2-1) unstable; urgency=medium
 
-  * Go back to debian/trixie branch for a stable update
-  * d/tests/manual/1065022.sh: Update manual test script used to reproduce
-    and test fixes for #1065022
-    - Adapt to upgrade from bookworm to trixie, rather than bookworm to sid
-    - Optionally reproduce #1110696 instead
-    - Optionally test the extra safety checks in the postrm
-    - Add a simpler mechanism to test proposed packages for either
-      bookworm or trixie
-    - Improve diagnostic output
+  * New upstream release
+  * d/patches: Drop patches that were included in the new upstream release
+  * d/watch: Only watch for stable (even-numbered) branches for now
 
- -- Simon McVittie <smcv@debian.org>  Mon, 18 Aug 2025 09:30:17 +0100
+ -- Simon McVittie <smcv@debian.org>  Wed, 19 Nov 2025 10:18:28 +0000
+
+glib2.0 (2.86.1-2) unstable; urgency=medium
+
+  * d/p/gresolver-Fix-loopback-detection-of-IPv6-addresses.patch,
+    d/p/glib-tests-regex-Add-a-future-proof-test-case-for-missing.patch,
+    d/p/gregex-Handle-PCRE2_ERROR_MISSING_NUMBER_TERMINATOR-if-de.patch,
+    d/p/tests-regex-Add-the-error-messages-to-tests.patch,
+    d/p/gutils-Strip-all-trailing-slashes.patch:
+    Add bug fixes from upstream glib-2-86 branch up to 2.86.1-8-g61384f791d.
+    In particular this should fix test failures with pcre2 10.47
+    (Closes: #1118572)
+  * d/control: Drop B-D on docbook-xml, docbook-xsl, xsltproc.
+    The man pages are now written in reStructuredText rather than Docbook
+    XML, so we no longer need these.
+  * d/control: Add comments clarifying the meaning of non-trivial build
+    profile conditions
+  * d/watch: Convert to uscan format v5
+
+ -- Simon McVittie <smcv@debian.org>  Mon, 03 Nov 2025 18:50:56 +0000
+
+glib2.0 (2.86.1-1) unstable; urgency=medium
+
+  * New upstream release
+    - Functionally equivalent to 2.86.0-7
+  * Drop patches that were included in the new upstream release
+
+ -- Simon McVittie <smcv@debian.org>  Tue, 21 Oct 2025 17:53:23 +0100
+
+glib2.0 (2.86.0-7) unstable; urgency=medium
+
+  * d/p/gtype-Use-transfer-none-for-types-un-ref-functions.patch,
+    d/p/gopenuriportal-Fix-a-crash-when-the-file-can-t-be-opened.patch,
+    d/p/gnetworkmonitorbase-Add-missing-notify-connectivity-signa.patch:
+    Update to upstream glib-2-86 branch commit 2.86.0-89-gb97228a7c7,
+    excluding CI-only changes.
+    - d/p/gtype-Define-copy-and-free-functions-for-GTypeClass-and-G.patch:
+      Remove patch. The issue was fixed differently upstream by
+      d/p/gtype-Use-transfer-none-for-types-un-ref-functions.patch.
+  * d/p/debian/girepository-Search-for-typelibs-in-the-pre-multiarch-pat.patch:
+    Add patch adding support for the legacy pre-multiarch typelib path.
+    This avoids pygobject 3.54 and gjs 1.86 being unable to load typelibs
+    from that legacy location, which caused an autopkgtest failure in
+    isenkram and a runtime failure in ibus-anthy. (Closes: #1099192)
+  * Release to unstable now that #1115340 is complete
+
+ -- Simon McVittie <smcv@debian.org>  Tue, 21 Oct 2025 14:53:20 +0100
+
+glib2.0 (2.86.0-6) experimental; urgency=low
+
+  * d/p/gio-tests-Factor-out-connection_wait_for_bus-from-gdbus-s.patch,
+    d/p/gio-tests-Avoid-a-race-condition.patch,
+    d/p/gio-tests-Convert-the-time-to-wait-for-expected-signal-in.patch,
+    d/p/gio-tests-Wait-up-to-10-seconds-for-a-signal-to-be-receiv.patch:
+    Mark patches for #1115617 as having been applied upstream
+  * d/patches: Update to upstream glib-2-86 branch, commit
+    2.86.0-80-g344fceba86
+    - Various bug fixes backported from 2.87 development
+  * d/control: Bump Breaks on gnome-shell to 48.5-3.
+    The testing migration software appears to be better at identifying
+    suitable upgrade paths for A Breaks B (<< b) than it is at doing the same
+    when B Depends A (<< a).
+    (In this case, "A" is glib2.0 and "B" is gnome-shell.)
+  * d/control: Increase Breaks on awesome to a version that really existed.
+    Its compatibility with newer gir1.2-glib-2.0 was fixed in 4.3-8,
+    and there was never a 4.3-7.1 upload.
+  * d/control: Remove Breaks/Replaces on packages older than Debian 12.
+    We only support single-release upgrades (Debian 12 -> 13 -> 14)
+    so we certainly don't need Breaks on Debian 11 packages.
+  * Upload to experimental to avoid disrupting #1115340
+
+ -- Simon McVittie <smcv@debian.org>  Tue, 14 Oct 2025 15:14:47 +0100
+
+glib2.0 (2.86.0-5) unstable; urgency=medium
+
+  * d/control: gir1.2-glib-2.0 Breaks older versions of gnome-menus
+  * Release to unstable (transition: #1115340)
+
+ -- Simon McVittie <smcv@debian.org>  Mon, 13 Oct 2025 14:54:02 +0100
+
+glib2.0 (2.86.0-4) experimental; urgency=medium
+
+  [ Simon McVittie ]
+  * d/p/gio-tests-Factor-out-connection_wait_for_bus-from-gdbus-s.patch,
+    d/p/gio-tests-Avoid-a-race-condition.patch,
+    d/p/gio-tests-Convert-the-time-to-wait-for-expected-signal-in.patch,
+    d/p/gio-tests-Wait-up-to-10-seconds-for-a-signal-to-be-receiv.patch:
+    Add proposed patches to fix a test failure seen on s390x
+    (Closes: #1115617)
+  * d/libglib2.0-0t64.symbols: g_memory_monitor_poll_get_type()
+    is Linux-only
+
+  [ Jeremy Bícha ]
+  * libglib2.0-doc: Remove Suggests: devhelp
+
+ -- Simon McVittie <smcv@debian.org>  Fri, 19 Sep 2025 14:23:19 +0100
+
+glib2.0 (2.86.0-3) experimental; urgency=medium
+
+  * d/control: Update gir1.2-glib-2.0 Breaks on cinnamon.
+    6.4.10-3 was never uploaded, and 6.4.12-1 is the first version that
+    included the necessary changes to be compatible with GLib 2.86.
+  * d/control: Reduce Breaks on gnome-shell to 48.5-2.
+    The necessary changes have been backported. In the 48.5-2 packaging,
+    I've set it up to have a versioned dependency on gir1.2-glib-2.0
+    (>= 2.86) or (<< 2.86) depending which one it was compiled against,
+    so that it can be binNMU'd.
+  * d/control: Add a versioned Breaks on libgjs0g, not just libgjs0.
+    Version 1.82.3-2 has backports of the changes that make gjs 1.86.0
+    compatible with GLib 2.86.
+  * d/control: gir1.2-glib-2.0 Breaks awesome, due to #1115591.
+    This assumes that the next maintainer upload or NMU of awesome will
+    address #1115591.
+  * d/patches: Update to glib-2-86 branch commit 2.86.0-53-g043d14fdd3
+
+ -- Simon McVittie <smcv@debian.org>  Thu, 18 Sep 2025 17:29:26 +0100
+
+glib2.0 (2.86.0-2) experimental; urgency=medium
+
+  * debian/control: Add breaks to gir on cinnamon << 6.4.10-3.
+    Cinnamon requires being rebuilt and adjusted to work with newer glib
+    typelibs
+
+ -- Marco Trevisan (Treviño) <marco@ubuntu.com>  Fri, 12 Sep 2025 04:01:08 +0200
+
+glib2.0 (2.86.0-1) experimental; urgency=medium
+
+  [ Jeremy Bícha ]
+  * New upstream release
+  * Refresh patches
+  * Remove obsolete Rules-Requires-Root: no field
+  * Remove a reference to the debian/forky branch
+
+  [ Simon McVittie ]
+  * Standards-Version: 4.7.2 (no changes required)
+
+  [ Marco Trevisan (Treviño) ]
+  * debian/control:
+    - Add breaks on GLib gir for libgjs0 << 1.85.90
+    - Add breaks on GLib gir for python3-gi << 3.50.0-5
+    - Add a Breaks to gir1.2-glib-2.0 on gnome-shell << 49~rc
+  * debian/patches: Introspect missing GObject type classes ref methods
+  * debian/libglib2.0-tests.lintian-overrides: Ignore testprogramrunner warn
+
+ -- Marco Trevisan (Treviño) <marco@ubuntu.com>  Thu, 11 Sep 2025 14:01:28 +0200
+
+glib2.0 (2.85.4-1) experimental; urgency=medium
+
+  * New upstream development release
+
+ -- Simon McVittie <smcv@debian.org>  Fri, 22 Aug 2025 17:28:13 +0100
+
+glib2.0 (2.85.3-1) experimental; urgency=medium
+
+  * New upstream development release
+  * d/copyright: Update
+  * Merge packaging from unstable (Closes: #1110825, #1110696)
+
+ -- Simon McVittie <smcv@debian.org>  Mon, 18 Aug 2025 20:00:49 +0100
+
+glib2.0 (2.85.2-2) experimental; urgency=medium
+
+  * Backport patches to fix racy GMemoryMonitor as detected by build-time tests
+
+ -- Alessandro Astone <alessandro.astone@canonical.com>  Wed, 30 Jul 2025 18:35:13 +0200
+
+glib2.0 (2.85.2-1) experimental; urgency=medium
+
+  * Team upload
+  * New upstream release
+    - Among other things this addresses CVE-2025-7039 via changes similar to
+      those in 2.84.4 (Closes: #1110640)
+  * debian/patches: Drop patch applied upstream
+  * debian/patches: Refresh
+  * debian/libglib2.0-0t64.symbols: Add new symbols
+
+ -- Alessandro Astone <alessandro.astone@canonical.com>  Wed, 30 Jul 2025 13:02:02 +0200
+
+glib2.0 (2.85.1-2) experimental; urgency=medium
+
+  * Backport patch fixing deadlock regression
+
+ -- Alessandro Astone <alessandro.astone@canonical.com>  Wed, 09 Jul 2025 15:42:53 +0200
+
+glib2.0 (2.85.1-1) experimental; urgency=medium
+
+  * New upstream release
+  * debian/*.symbols: Add new symbols
+  * Remove gfileutils-Preserve-mode-during-atomic-updates.patch:
+    applied in new release
+
+ -- Jeremy Bícha <jbicha@ubuntu.com>  Thu, 03 Jul 2025 11:35:13 -0400
 
 glib2.0 (2.84.4-3) unstable; urgency=medium
 

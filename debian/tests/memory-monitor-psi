@@ -1,0 +1,37 @@
+#!/bin/sh
+# (C) 2013 Canonical Ltd.
+# (C) 2019 Collabora Ltd.
+
+set -eu
+NULL=
+
+export DEB_ALLOW_FLAKY_TESTS=1
+export GIO_USE_VFS=local
+export GIO_USE_VOLUME_MONITOR=unix
+export XDG_RUNTIME_DIR="$AUTOPKGTEST_TMP"
+failed=0
+
+/usr/libexec/installed-tests/glib/memory-monitor-psi \
+	|| failed=1
+
+/usr/libexec/installed-tests/glib/memory-monitor-psi-env-set \
+	-p /memory-monitor-psi-env-set/receive-signal \
+	|| failed=1
+
+/usr/libexec/installed-tests/glib/memory-monitor-psi-env-set \
+	-p /memory-monitor-psi-env-set/write-env-no-write \
+	|| failed=1
+
+/usr/libexec/installed-tests/glib/memory-monitor-psi-env-set \
+	-p /memory-monitor-psi-env-set/write-env \
+	|| failed=1
+
+/usr/libexec/installed-tests/glib/memory-monitor-psi-env-set \
+	-p /memory-monitor-psi-env-set/write-env-null \
+	|| failed=1
+
+/usr/libexec/installed-tests/glib/memory-monitor-psi-env-set \
+	-p /memory-monitor-psi-env-set/write-env-unix-domain-socket \
+	|| failed=1
+
+exit "$failed"

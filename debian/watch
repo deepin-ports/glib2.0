@@ -1,15 +1,19 @@
-version=4
-opts="searchmode=plain, uversionmangle=s/\.(alpha|beta|rc)/~$1/, downloadurlmangle=s|cache.json||" \
-https://download.gnome.org/sources/glib/cache.json \
-	[\d.]+[02468]/glib-@ANY_VERSION@@ARCHIVE_EXT@
-#opts="mode=git,compression=xz" \
-#https://gitlab.gnome.org/GNOME/glib.git \
-#refs/tags/@ANY_VERSION@
+Version: 5
+
+Source: https://download.gnome.org/sources/glib/cache.json
+Matching-Pattern: [\d.]+/glib-@ANY_VERSION@@ARCHIVE_EXT@
+Download-Url-Mangle: s|cache.json||
+Search-Mode: plain
+Uversion-Mangle: s/\.(alpha|beta|rc)/~$1/
 
 # Update the version as needed to correspond to the version of Unicode
 # data used to generate glib/gunichartables.h etc.
 # Update and run the maintainer-update-unicode-data target in d/rules
 # to verify
-opts="component=unicode-data, compression=xz, downloadurlmangle=s#/?$#/UCD.zip#, filenamemangle=s#.*/([^/]+)/?$#UCD-$1.zip#" \
-https://www.unicode.org/Public/zipped/ \
-(16\.0\.0)/?
+Component: unicode-data
+Source: https://www.unicode.org/Public/
+Matching-Pattern: (17\.0\.0)/?
+Dversion-Mangle: s/@ANY_VERSION@/17\.0\.0/
+Compression: xz
+Download-Url-Mangle: s#/?$#/ucd/UCD.zip#
+Filename-Mangle: s#.*/([^/]+)/?$#UCD-$1.zip#

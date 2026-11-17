@@ -1,40 +1,40 @@
 Source: glib2.0
-Section: libs
-Priority: optional
+Standards-Version: 4.7.4
 Maintainer: Debian GNOME Maintainers <pkg-gnome-maintainers@lists.alioth.debian.org>
 Uploaders:
  Jeremy Bícha <jbicha@ubuntu.com>,
  Marco Trevisan (Treviño) <marco@ubuntu.com>,
  Simon McVittie <smcv@debian.org>,
+Section: libs
+# B-D on dbus-daemon, etc. if (!nocheck) || (!noinsttest)
 Build-Depends:
- dbus-daemon <!nocheck> <!noinsttest>,
  debhelper-compat (= 13),
  dh-sequence-gnome,
  dh-sequence-python3,
- docbook-xml,
- docbook-xsl,
+ dpkg-dev (>= 1.22.5),
+ dbus-daemon <!nocheck> <!noinsttest>,
  gettext,
  libdbus-1-dev <!nocheck> <!noinsttest>,
  libelf-dev,
  libffi-dev,
  libmount-dev [linux-any],
  libpcre2-dev,
- libselinux1-dev [linux-any],
- libsysprof-capture-4-dev (>= 3.38.0) [amd64 arm64 armel armhf i386 mips64el ppc64el riscv64 s390x hppa loong64 powerpc ppc64 sh4] <!pkg.glib2.0.nosysprof>,
+ libselinux-dev [linux-any],
+ libsysprof-capture-4-dev [linux-any],
  libxml2-utils,
  linux-libc-dev [linux-any],
  meson (>= 1.4.0),
  pkgconf,
  python3-debian:native,
  python3-docutils <!nodoc>,
- python3-packaging:native,
+ python3-packaging,
  python3:native,
- xsltproc,
  zlib1g-dev,
+# B-D-A on cross-exe-wrapper if (cross && !nogir)
 Build-Depends-Arch:
+ dh-sequence-gir <!nogir>,
  cross-exe-wrapper <cross !nogir>,
  desktop-file-utils <!nocheck>,
- dh-sequence-gir <!nogir>,
  gobject-introspection (>= 1.80.0) <!nogir>,
  locales <!nocheck> | locales-all <!nocheck>,
  python3-dbus <!nocheck>,
@@ -43,24 +43,18 @@ Build-Depends-Arch:
  tzdata <!nocheck>,
  tzdata-legacy <!nocheck>,
  xterm <!nocheck>,
+# B-D-I on cross-exe-wrapper if (cross && !nodoc)
 Build-Depends-Indep:
  cross-exe-wrapper <cross !nodoc>,
- gi-docgen (>= 2024.1) <!nodoc>,
+ gi-docgen (>= 2026.1) <!nodoc>,
  gobject-introspection (>= 1.80.0) <!nodoc>,
-Rules-Requires-Root: no
-Standards-Version: 4.7.0
-Homepage: https://gitlab.gnome.org/GNOME/glib
 Vcs-Browser: https://salsa.debian.org/gnome-team/glib
-Vcs-Git: https://salsa.debian.org/gnome-team/glib.git -b debian/trixie
+Vcs-Git: https://salsa.debian.org/gnome-team/glib.git
+Homepage: https://gitlab.gnome.org/GNOME/glib
 
-Package: libglib2.0-0
+Package: libglib2.0-0t64
 Architecture: any
-Provides:
- libgio-2.0-0 (= ${binary:Version}),
- libglib-2.0-0 (= ${binary:Version}),
- libgmodule-2.0-0 (= ${binary:Version}),
- libgobject-2.0-0 (= ${binary:Version}),
- libgthread-2.0-0 (= ${binary:Version}),
+Multi-Arch: same
 Depends:
  ${misc:Depends},
  ${shlibs:Depends},
@@ -68,16 +62,20 @@ Recommends:
  libglib2.0-data,
  shared-mime-info,
  xdg-user-dirs,
-Breaks:
- glib-networking-tests (<< 2.70.0~),
- gnome-keyring (<< 40.0-3~),
- gnome-shell (<< 44.9-2~),
- libedataserver-1.2-26 (<< 3.44.3-2~),
- libgladeui-2-6 (<< 3.22.2),
- libsoup2.4-tests (<< 2.72.0-3~),
 Suggests:
  low-memory-monitor,
-Multi-Arch: same
+Breaks:
+ gnome-shell (<< 44.9-2~),
+ libglib2.0-0 (<< 2.80.0-7~),
+Provides:
+ libgio-2.0-0 (= ${binary:Version}),
+ libglib-2.0-0 (= ${binary:Version}),
+ libgmodule-2.0-0 (= ${binary:Version}),
+ libgobject-2.0-0 (= ${binary:Version}),
+ libgthread-2.0-0 (= ${binary:Version}),
+ ${t64:Provides},
+Replaces:
+ libglib2.0-0 (<< 2.80.0-7~),
 Description: GLib library of C routines
  GLib is a library containing many useful C routines for things such
  as trees, hashes, lists, and strings.  It is a useful general-purpose
@@ -87,8 +85,8 @@ Description: GLib library of C routines
 
 # Build if (!noinsttest) && (!nogir)
 Package: libglib2.0-tests
-Build-Profiles: <!noinsttest !nogir>
 Architecture: any
+Build-Profiles: <!noinsttest !nogir>
 Depends:
  desktop-file-utils,
  gir1.2-gio-2.0-dev,
@@ -115,10 +113,10 @@ Description: GLib library of C routines - installed tests
  regression testsuite.
 
 Package: libglib2.0-udeb
-Build-Profiles: <!noudeb>
-Section: debian-installer
-Package-Type: udeb
 Architecture: any
+Build-Profiles: <!noudeb>
+Package-Type: udeb
+Section: debian-installer
 Depends:
  ${misc:Depends},
  ${shlibs:Depends},
@@ -133,13 +131,13 @@ Description: GLib library of C routines - minimal runtime
  installer.
 
 Package: libglib2.0-bin
-Section: misc
 Architecture: any
+Multi-Arch: foreign
+Section: misc
 Depends:
  libglib2.0-data,
  ${misc:Depends},
  ${shlibs:Depends},
-Multi-Arch: foreign
 Description: Programs for the GLib library
  GLib is a library containing many useful C routines for things such
  as trees, hashes, lists, and strings.  It is a useful general-purpose
@@ -157,32 +155,31 @@ Description: Programs for the GLib library
   * glib-compile-schemas, which updates caches used internally by GLib
 
 Package: libgio-2.0-dev
-Section: libdevel
 Architecture: any
 Multi-Arch: same
+Section: libdevel
 Depends:
  libffi-dev,
- libglib2.0-0 (= ${binary:Version}),
+ libglib2.0-0t64 (= ${binary:Version}),
  libmount-dev [linux-any],
  libpcre2-dev,
- libselinux1-dev [linux-any],
- libsysprof-capture-4-dev (>= 3.38.0) [amd64 arm64 armel armhf i386 mips64el ppc64el riscv64 s390x hppa loong64 powerpc ppc64 sh4] <!pkg.glib2.0.nosysprof>,
+ libselinux-dev [linux-any],
+ libsysprof-capture-4-dev [linux-any],
  pkgconf,
  zlib1g-dev,
  ${misc:Depends},
- ${shlibs:Depends},
 Recommends:
  libgio-2.0-dev-bin (= ${binary:Version}),
  libglib2.0-bin (= ${binary:Version}),
+Suggests:
+ gir1.2-glib-2.0-dev,
+ libglib2.0-doc,
 Breaks:
  libglib2.0-dev (<< 2.83),
  libglib2.0-dev-bin (<< 2.83),
 Replaces:
  libglib2.0-dev (<< 2.83),
  libglib2.0-dev-bin (<< 2.83),
-Suggests:
- gir1.2-glib-2.0-dev,
- libglib2.0-doc,
 Description: Development files for the GLib, GObject and GIO libraries
  GLib is a library containing many useful C routines for things such
  as trees, hashes, lists, and strings.  It is a useful general-purpose
@@ -201,23 +198,15 @@ Description: Development files for the GLib, GObject and GIO libraries
  files.
 
 Package: libglib2.0-dev
-Section: libdevel
 Architecture: any
 Multi-Arch: same
+Section: libdevel
 Depends:
  girepository-tools (= ${binary:Version}),
  libgio-2.0-dev (= ${binary:Version}),
  libglib2.0-bin (= ${binary:Version}),
  libglib2.0-dev-bin (= ${binary:Version}),
  ${misc:Depends},
- ${python3:Depends},
- ${shlibs:Depends},
-Breaks:
- libgio-2.0-dev (<< 2.83),
- libglib2.0-0-dbg (<< 2.51.4-1~),
-Replaces:
- libgio-2.0-dev (<< 2.83),
- libglib2.0-0-dbg (<< 2.51.4-1~),
 Suggests:
  gir1.2-glib-2.0-dev,
  libglib2.0-doc,
@@ -236,8 +225,9 @@ Description: Development metapackage for the GLib family of libraries
  can be found in the gir1.2-glib-2.0-dev package.
 
 Package: libgio-2.0-dev-bin
-Section: libdevel
 Architecture: any
+Multi-Arch: foreign
+Section: libdevel
 Depends:
  python3-packaging,
  ${misc:Depends},
@@ -249,14 +239,11 @@ Suggests:
  libgdk-pixbuf2.0-bin,
  libxml2-utils,
 Breaks:
- libgio-2.0-dev (<< 2.83),
  libglib2.0-dev (<< 2.83),
  libglib2.0-dev-bin (<< 2.83),
 Replaces:
- libgio-2.0-dev (<< 2.83),
  libglib2.0-dev (<< 2.83),
  libglib2.0-dev-bin (<< 2.83),
-Multi-Arch: foreign
 Description: Development utilities for GLib, GObject and GIO libraries
  GLib is a library containing many useful C routines for things such
  as trees, hashes, lists, and strings.  It is a useful general-purpose
@@ -282,17 +269,16 @@ Description: Development utilities for GLib, GObject and GIO libraries
  architecture-prefixed versions in the girepository-tools package instead.
 
 Package: libglib2.0-dev-bin
-Section: libdevel
 Architecture: any
+Multi-Arch: foreign
+Section: libdevel
 Depends:
  girepository-tools (= ${binary:Version}),
  libgio-2.0-dev-bin (= ${binary:Version}),
  ${misc:Depends},
- ${shlibs:Depends},
 Suggests:
  libgdk-pixbuf2.0-bin,
  libxml2-utils,
-Multi-Arch: foreign
 Description: Development utilities for the GLib library
  GLib is a library containing many useful C routines for things such
  as trees, hashes, lists, and strings.  It is a useful general-purpose
@@ -307,9 +293,9 @@ Description: Development utilities for the GLib library
 
 Package: libglib2.0-data
 Architecture: all
+Multi-Arch: foreign
 Depends:
  ${misc:Depends},
-Multi-Arch: foreign
 Description: Common files for GLib library
  GLib is a library containing many useful C routines for things such
  as trees, hashes, lists, and strings.  It is a useful general-purpose
@@ -319,14 +305,12 @@ Description: Common files for GLib library
  languages other than English.
 
 Package: libglib2.0-doc
-Build-Profiles: <!nodoc>
-Section: doc
 Architecture: all
+Build-Profiles: <!nodoc>
+Multi-Arch: foreign
+Section: doc
 Depends:
  ${misc:Depends},
-Suggests:
- devhelp,
-Multi-Arch: foreign
 Description: Documentation files for the GLib library
  GLib is a library containing many useful C routines for things such
  as trees, hashes, lists, and strings.  It is a useful general-purpose
@@ -336,9 +320,9 @@ Description: Documentation files for the GLib library
  in /usr/share/doc/libglib2.0-doc/ .
 
 Package: girepository-tools
-Section: libdevel
 Architecture: any
 Multi-Arch: same
+Section: libdevel
 Depends:
  native-architecture | cross-exe-wrapper,
  ${misc:Depends},
@@ -386,14 +370,13 @@ Description: GLib runtime library for handling GObject introspection data
  as PyGObject and gjs to call GObject methods.
 
 Package: libgirepository-2.0-dev
-Section: libdevel
 Architecture: any
 Multi-Arch: same
+Section: libdevel
 Depends:
  libgirepository-2.0-0 (= ${binary:Version}),
  libglib2.0-dev (= ${binary:Version}),
  ${misc:Depends},
- ${shlibs:Depends},
 Description: Development files for the GObject introspection library
  GLib is a library containing many useful C routines for things such
  as trees, hashes, lists, and strings.  It is a useful general-purpose
@@ -405,17 +388,24 @@ Description: Development files for the GObject introspection library
  can be found in the gir1.2-girepository-3.0-dev package.
 
 Package: gir1.2-glib-2.0
-Build-Profiles: <!nogir>
 Architecture: any
+Build-Profiles: <!nogir>
 Multi-Arch: same
 Section: introspection
 Depends:
  ${gir:Depends},
  ${misc:Depends},
+Breaks:
+ awesome (<< 4.3-8~),
+ cinnamon (<< 6.4.12-1~),
+ gnome-menus (<< 3.36.0-4~),
+ gnome-shell (<< 48.5-3~),
+ libgirepository-1.0-1 (<< 1.78.1-3~),
+ libgjs0 (<< 1.87.2~),
+ libgjs0g (<< 1.82.3-2~),
+ python3-gi (<< 3.55.3~),
 Provides:
  ${gir:Provides},
-Breaks:
- libgirepository-1.0-1 (<< 1.78.1-3~),
 Description: Introspection data for GLib, GObject, Gio and GModule
  GObject Introspection is a project for providing machine readable
  introspection data of the API of C libraries. This introspection
@@ -428,19 +418,19 @@ Description: Introspection data for GLib, GObject, Gio and GModule
  bindings for dynamic languages like JavaScript and Python.
 
 Package: gir1.2-glib-2.0-dev
-Build-Profiles: <!nogir>
 Architecture: any
+Build-Profiles: <!nogir>
 Multi-Arch: same
 Section: libdevel
 Depends:
  gir1.2-glib-2.0 (= ${binary:Version}),
  ${gir:Depends},
  ${misc:Depends},
-Provides:
- ${gir:Provides},
 Breaks:
  libgirepository-1.0-1 (<< 1.78.1-3~),
  libgirepository1.0-dev (<< 1.78.1-7~),
+Provides:
+ ${gir:Provides},
 Replaces:
  libgirepository1.0-dev (<< 1.78.1-7~),
 Description: GIR XML for GLib, GObject, Gio and GModule
@@ -455,8 +445,8 @@ Description: GIR XML for GLib, GObject, Gio and GModule
  bindings for static languages like C++, D and Haskell.
 
 Package: gir1.2-girepository-3.0
-Build-Profiles: <!nogir>
 Architecture: any
+Build-Profiles: <!nogir>
 Multi-Arch: same
 Section: introspection
 Depends:
@@ -474,8 +464,8 @@ Description: Introspection data for GIRepository library, API version 3.0
  and load introspection data.
 
 Package: gir1.2-girepository-3.0-dev
-Build-Profiles: <!nogir>
 Architecture: any
+Build-Profiles: <!nogir>
 Multi-Arch: same
 Section: libdevel
 Depends:
